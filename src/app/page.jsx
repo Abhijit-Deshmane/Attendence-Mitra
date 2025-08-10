@@ -49,7 +49,27 @@ export default function Home() {
             <Button>GET STARTED</Button>{" "}
           </span>
         </div>
-        <div className="w-[50%] h-full border rounded-4xl">rightpart</div>
+        <div className="w-[50%] h-full border rounded-4xl flex" >
+          <div className="w-[300px] h-[350px] relative mt-64 ml-16" >
+            <Image
+            src="/herosection1.jpg"
+            alt="hero image"
+            width={100}
+            height={50}
+            className="w-full h-full object-cover rounded-2xl"
+          />
+          </div>
+          
+          <div className="w-[300px] h-[350px] relative ml-20 mt-12 " >
+            <Image
+            src="/herosection2.jpg"
+            alt="hero image"
+            width={100}
+            height={50}
+            className="w-full h-full object-cover rounded-2xl"
+          />
+          </div>
+        </div>
       </div>
     </div>
   );
