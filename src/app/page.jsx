@@ -2,12 +2,13 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { navLinks } from "@/constants/navLinks";
 import Link from "next/link";
+import { Check } from "lucide-react";
 
 export default function Home() {
   return (
     <div className="w-screen h-screen">
-      <nav className="border w-full h-20  flex justify-between items-center ">
-        <h1 className="text-3xl pl-4 text-blue-500 ml-8">Attendence Mitra</h1>
+      <nav className="border-b-2 w-full h-20  flex justify-between items-center ">
+        <h1 className="text-4xl pl-4 text-blue-600 ml-8">Attendence Mitra</h1>
         <div>
           {navLinks.map((link, index) => (
             <Link
@@ -19,7 +20,7 @@ export default function Home() {
             </Link>
           ))}
         </div>
-        <div>
+        <div className="mr-10">
           <Button variant="blueButton" className={"mr-2.5"}>
             sign in{" "}
           </Button>
@@ -29,7 +30,7 @@ export default function Home() {
         </div>
       </nav>
       <div className="flex justify-between w-full h-[calc(100vh-80px)] ">
-        <div className="w-[50%] h-full border rounded-4xl">
+        <div className="w-[50%] h-full ">
           <h1 className="text-5xl mt-28 ml-12 ">
             Best <span className="text-blue-500 font-serif ">Student</span>
             <br /> Attendence Platform <br />{" "}
@@ -49,7 +50,7 @@ export default function Home() {
             <Button>GET STARTED</Button>{" "}
           </span>
         </div>
-        <div className="w-[50%] h-full border rounded-4xl flex" >
+        <div className="w-[50%] h-full flex relative" >
           <div className="w-[300px] h-[350px] relative mt-64 ml-16" >
             <Image
             src="/herosection1.jpg"
@@ -60,7 +61,7 @@ export default function Home() {
           />
           </div>
           
-          <div className="w-[300px] h-[350px] relative ml-20 mt-12 " >
+          <div className="w-[300px] h-[350px] relative ml-16 mt-[70px] " >
             <Image
             src="/herosection2.jpg"
             alt="hero image"
@@ -68,6 +69,10 @@ export default function Home() {
             height={50}
             className="w-full h-full object-cover rounded-2xl"
           />
+          </div>
+          <div className="border w-auto bg-blue-500 p-2.5 h-auto ml-80 rounded-md  mt-[420px] absolute">
+            <h1 className="flex gap-2.5 font-semibold text-xl text-white">  <Check/> Get Exclusive features </h1>
+            <h1 className="flex gap-2.5 font-semibold text-xl text-white"> <Check/> Get free access to every <br /> features  </h1>
           </div>
         </div>
       </div>
