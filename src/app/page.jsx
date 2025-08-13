@@ -21,12 +21,13 @@ export default function Home() {
           ))}
         </div>
         <div className="mr-10">
-          <Button variant="blueButton" className={"mr-2.5"}>
+          <Link key={"1"} href={"/signin"}>  <Button variant="blueButton" className={"mr-2.5"}>
             sign in{" "}
-          </Button>
+          </Button> </Link>
+          <Link  key={"2"} href={"/signup"}> 
           <Button variant="blueButton" className={"mr-3.5"}>
             sign up{" "}
-          </Button>
+          </Button></Link>
         </div>
       </nav>
       <div className="flex justify-between w-full h-[calc(100vh-80px)] ">

@@ -3,7 +3,7 @@
 import { PrismaClient } from "@prisma/client";
 import axios from "axios";
 import { signIn } from "next-auth/react";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const prisma = new PrismaClient
@@ -13,19 +13,19 @@ export default function SingUpPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
+  const router = useRouter();
   const handleSubmit = async (e) => {
     e.preventDefault();
     
     console.log(username,email,password)
     try{
         
-    const createUser = await axios.post("http://localhost:3000/signup", {
+    const createUser = await axios.post("http://localhost:3000/api/auth/signup", {
         username,
         email,
         password
     });
-    redirect("/dashboard")
+    router.push("/dashboard/sheet");
     return Response.json({message : "User created", data : user},{status:200})
     
     }catch(error){

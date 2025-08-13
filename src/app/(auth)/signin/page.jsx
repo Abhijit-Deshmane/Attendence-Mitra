@@ -1,6 +1,7 @@
 "use client";
 
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function LoginPage() {
@@ -8,6 +9,7 @@ export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,13 +17,14 @@ export default function LoginPage() {
     const res = await signIn("credentials", {
       username,
       email,
-      password,
+      password,                                    
       redirect: true,
-      callbackUrl: "/dashboard" //our protected  route 
-    });
-
-    if (res?.error) {
-      setError("Invalid email or password");
+    });                                                                                                                                                        
+    if (res?.error) {                                                                                            
+      setError("Invalid credentials. Please try again.");    
+    }else{
+      router.push("/dashboard/sheet");
+      return null;   
     }
   };
 
@@ -40,10 +43,7 @@ export default function LoginPage() {
             required
           />
         </div>
-        
-        
-        
-        
+         
         <div className="mb-4">
           <label className="block mb-1">Email</label>
           <input
@@ -54,6 +54,7 @@ export default function LoginPage() {
             required
           />
         </div>
+
         <div className="mb-4">
           <label className="block mb-1">Password</label>
           <input
@@ -64,6 +65,7 @@ export default function LoginPage() {
             required
           />
         </div>
+        
         <button
           type="submit"
           className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"

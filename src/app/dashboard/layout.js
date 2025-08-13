@@ -9,6 +9,7 @@ export default function RootLayout({ children }) {
       <html lang="en" suppressHydrationWarning>
         <head />
         <body>
+          <>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -21,6 +22,7 @@ export default function RootLayout({ children }) {
               {children}
             </div>
           </ThemeProvider>
+          </>
         </body>
       </html>
     </>

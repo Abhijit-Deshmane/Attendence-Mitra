@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
-import { hash } from "bcryptjs";
+import { hash } from "bcrypt";
 import { redirect } from "next/navigation";
 
 const prisma = new PrismaClient();
@@ -11,7 +11,7 @@ export async function POST(req) {
     const { username, email, password } = await req.json();
      console.log({username,password,email})
     if (!username || !email || !password) {
-      return NextResponse.json({ error: "All fields are required" }, { status: 400 });
+      return Response.json({ error: "All fields are required" }, { status: 400 });
     }
 
     // Check if user exists
@@ -33,7 +33,9 @@ export async function POST(req) {
     });
 
     if(user){
-       console.log(user)
+       console.log(user);
+      
+
     }
 
     return NextResponse.json({ message: "User registered successfully" }, { status: 200});
