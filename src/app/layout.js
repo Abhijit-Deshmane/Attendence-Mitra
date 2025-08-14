@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "@/lib/provider";
+import { ThemeProvider } from "@/components/theme-provider";
 
 
 export const metadata = {
@@ -10,13 +11,55 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+      <> 
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={"antialiased"}
       >
+
+
+    <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            
         <Providers> {children} </Providers>
+              
+          </ThemeProvider>
+
+
+
+
+
+
+            
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         
       </body>
     </html>
+        </>
   );
 }
