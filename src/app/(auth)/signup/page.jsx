@@ -6,7 +6,7 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const prisma = new PrismaClient
+const prisma = new PrismaClient();
 
 export default function SingUpPage() {
   const [email, setEmail] = useState("");
@@ -25,7 +25,7 @@ export default function SingUpPage() {
         email,
         password
     });
-    router.push("/dashboard/sheet");
+    router.push('/dashboard/sheet');
     return Response.json({message : "User created", data : user},{status:200})
     
     }catch(error){

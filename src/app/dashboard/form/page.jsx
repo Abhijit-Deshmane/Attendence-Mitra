@@ -5,8 +5,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { signIn } from "next-auth/react";
 
-import { PrismaClient } from "@prisma/client";
-import axios from "axios";
 import {
   Form,
   FormField,
@@ -38,31 +36,28 @@ export default function LoginForm() {
     },
   })
 const router = useRouter();
-const prisma = new PrismaClient();
 async function onSubmit(values) {
     const { username, email, password} = values;
 
-    const res = await axios.post("/api/auth/signup", {
-      username, 
-      email, 
-      password
-    })
+    const res = await signIn("credentials", {
+          username,
+          email,
+          password,                                    
+          redirect: true,
+        });
 
 if (res?.error) {                                                                                            
-      return Response.json({message:"Invalid credentials. Please try again.", error: res.error}, {status: 400});    
+      setError("Invalid credentials. Please try again.");    
     }
 
       router.push('/dashboard/sheet');
-      console.log("uer created successful",res);
-      return user;
-
+      console.log("login successful",res);
+      return null;
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-96 bg-white p-6 rounded shadow-md dark:bg-gray-800">
-        <h2 className="text-2xl font-bold mb-4 dark:text-white ml-30">Sign Up</h2>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-80">
         
          
         {/* Username */}
@@ -71,7 +66,7 @@ if (res?.error) {
           name="username"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input {...field} placeholder="Jhon deo" />
               </FormControl>
@@ -111,11 +106,10 @@ if (res?.error) {
           )}
         />
 
-        <Button type="submit" className="w-full dark:bg-blue-500 text-amber-50 text-xl">
-          Sign Up
+        <Button type="submit" className="w-full">
+          Login
         </Button>
       </form>
     </Form>
-    </div>
   )
 }

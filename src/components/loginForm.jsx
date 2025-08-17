@@ -59,7 +59,7 @@ if (res?.error) {
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="flex justify-center items-center min-full w-1/2">
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-96 bg-white p-6 rounded shadow-md dark:bg-gray-800">
         <h2 className="text-2xl font-bold mb-4 dark:text-white ml-30">Sign Up</h2>
