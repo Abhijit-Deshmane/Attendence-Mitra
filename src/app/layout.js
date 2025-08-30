@@ -2,6 +2,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "@/lib/provider";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/sonner"
+ 
 
 
 export const metadata = {
@@ -24,7 +26,10 @@ export default function RootLayout({ children }) {
             disableTransitionOnChange
           >
             
-        <Providers> {children} </Providers>
+        <Providers> {children}
+            <Toaster />
+          
+           </Providers>
               
           </ThemeProvider>
 

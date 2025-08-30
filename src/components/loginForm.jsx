@@ -19,6 +19,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
+import { toast } from "sonner";
 
 const loginSchema = z.object({
   username: z.string().min(2, {
@@ -40,26 +41,45 @@ export default function LoginForm() {
 const router = useRouter();
 const prisma = new PrismaClient();
 async function onSubmit(values) {
-    const { username, email, password} = values;
+    toast.message("Submitting...");
+  const { username, email, password} = values;
+  !username || !email || !password && toast.error("All fields are required");
+try{
+  toast.loading("Creating user...",{
+        action: {
+            label: "Undo",
+          },
+       });
+  const res = await axios.post("/api/auth/signup", {
+    username, 
+    email, 
+    password
+  })
 
-    const res = await axios.post("/api/auth/signup", {
-      username, 
-      email, 
-      password
-    })
-
-if (res?.error) {                                                                                            
-      return Response.json({message:"Invalid credentials. Please try again.", error: res.error}, {status: 400});    
+      toast.success("User created successfully!",{
+        action: {
+            label: "Undo",
+          },
+       });
+        router.push('/dashboard/sheet');
+        console.log("user created successful",res);
+        return user;
+  
+    }catch(error){
+       toast.error("User already exists.",{
+        action: {
+            label: "Undo",
+          },
+       }); 
+       toast.dismiss(); 
+      console.log("Error creating user",error);
+      return Response.json({message:"Error creating user", error: error},{status:500});
     }
+}
 
-      router.push('/dashboard/sheet');
-      console.log("uer created successful",res);
-      return user;
-
-  }
 
   return (
-    <div className="flex justify-center items-center min-full w-1/2">
+    <div className="flex justify-center items-center h-screen w-screen  ">
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-96 bg-white p-6 rounded shadow-md dark:bg-gray-800">
         <h2 className="text-2xl font-bold mb-4 dark:text-white ml-30">Sign Up</h2>

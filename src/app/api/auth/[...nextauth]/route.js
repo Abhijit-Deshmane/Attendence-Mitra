@@ -25,12 +25,18 @@ export const authOptions = {
           where: { email: credentials.email }
         });
 
-        if (!user) throw new Error("User not found");
+        if (!user){
+           throw new Error("User not found");
+           return Error("USer not found");
 
+        }
         // Check password
         const isValid = await compare(credentials.password, user.password);
-        if (!isValid) throw new Error("Invalid credentials");
+        if (!isValid){
 
+         throw new Error("Invalid credentials");
+         return null;
+        }  
         return {
           id: user.id,
           username: user.username,
