@@ -46,6 +46,11 @@ export const authOptions = {
     })
   ],
 
+pages: {
+    signIn: "/auth/signin", // fallback in case of error
+  },
+
+
   session: {
     strategy: "jwt"
   },

@@ -56,18 +56,22 @@ try{
       username,
       email,
       password,                                    
-      redirect: true,
+      redirect: false,
     });
-
-      toast.success("User Verified successfully!",{
-        action: {
-            label: "Undo",
-          },
-       });
-        router.push('/dashboard/sheet');
-        console.log("user Verified successful",res);
-        return user;
-  
+   if (res?.error) {
+      toast.error("Wrong email or password!");
+   }else if (res?.ok) {
+     
+     toast.success("User Verified successfully!",{
+       action: {
+         label: "Undo",
+        },
+      });
+      router.push('/dashboard/sheet');
+      console.log("user Verified successful",res);
+      return user;
+    }
+      
     }catch(error){
        toast.error("User already exists.",{
         action: {

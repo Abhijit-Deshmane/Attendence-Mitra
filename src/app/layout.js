@@ -1,10 +1,8 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "@/lib/provider";
-import { ThemeProvider } from "@/components/theme-provider";
-import { Toaster } from "@/components/ui/sonner"
- 
-
+import { ThemeProvider } from "@/app/ThemeProvider";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata = {
   title: "Attendence Mitra",
@@ -13,58 +11,21 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-      <> 
     <html lang="en" suppressHydrationWarning>
-      <body
-      >
-
-
-    <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            
-        <Providers> {children}
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Providers>
+            {" "}
+            {children}
             <Toaster />
-          
-           </Providers>
-              
-          </ThemeProvider>
-
-
-
-
-
-
-            
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
+          </Providers>
+        </ThemeProvider>
       </body>
     </html>
-        </>
   );
 }
