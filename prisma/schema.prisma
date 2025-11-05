@@ -8,14 +8,21 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model User {
+model USER {
   id        Int     @id @default(autoincrement())
   username  String
   email     String  @unique
   password  String
 }
 
-model Class {
+model CLASS {
   id      Int @id @default(autoincrement())
   class   String @unique
+}
+model STUDENTS {
+  id          Int     @id @default(autoincrement())
+  fullname    String
+  class       String  
+  rollNumber  Int 
+  contact     Int?
 }
