@@ -11,21 +11,41 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from '@/components/ui/input'
 import { useForm } from "react-hook-form"
-import { number } from 'zod'
-
+import GlobalApi from '@/app/dashboard/_Services/GlobalApi'
+import { toast } from 'sonner'
+import { LoaderIcon } from 'lucide-react'
 
 const AddNewStudent = () => {
     const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm()
 
     const[open,setOpen] = useState(false);
+    const [loading,setLoading] = useState(false);
     const onSubmit = (data)=>{
-        console.log("submit",data);
+        setLoading(true);
+   try {       
+    GlobalApi.CreateNewStudent(data).then(res => {
+     console.log(res);
+     if(res.data){
+         reset();
+         setOpen(false);
+         toast("New Student Added !")
+     }
+     setLoading(false)
+  }      
+  )
+   } catch (error) {
+    setLoading(false)
+    toast("Error while creating the New Student !")
+        
     }
+}
+
   return (
     <div> 
         <Button variant={"blueButton"} onClick = {() => setOpen(true)}>+ Add New Student</Button>
@@ -37,16 +57,16 @@ const AddNewStudent = () => {
                 </DialogDescription>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className='p-3'>
-                        <label htmlFor="FullName">Full Name</label>
-                        <Input  {...register("FullName", { required: true })} placeholder = "Enter full Name Ex. Akshay Deshmane"/>
+                        <label htmlFor="fullName">FullName</label>
+                        <Input  {...register("fullName", { required: true })} placeholder = "Enter full Name Ex. Akshay Deshmane"/>
                     </div>
                     <div className='p-3'>
-                        <label htmlFor="Contact">Contact</label>
-                        <Input {...register("Contact")} placeholder = "Ex. +91 xxxxxxxx90" type="number"/>
+                        <label htmlFor="contact">Contact</label>
+                    <Input {...register("contact")} placeholder = "Ex. +91 xxxxxxxx90" type={"number"}/>
                     </div>
                     <div className='flex flex-col p-3'>
-                        <label htmlFor="Class">Class</label>
-                       <select {...register("Class",{ required: true })} name="Class" id="class" className='p-2 rounded-md border'>
+                        <label htmlFor="class">Class</label>
+                       <select {...register("class",{ required: true })} name="Class" id="class" className='p-2 rounded-md border'>
                             <option value="FY">FY</option>
                             <option value="SY">SY</option>
                             <option value="TY">TY</option>
@@ -54,12 +74,14 @@ const AddNewStudent = () => {
                         </select>
                     </div>
                     <div className='p-3'>
-                        <label htmlFor="RollNumber">Roll Number</label>
-                        <Input {...register("RollNumber",{ required: true })} placeholder = "Ex. xx" type="number"/>
+                        <label htmlFor="rollNumber">Roll Number</label>
+                        <Input {...register("rollNumber",{ required: true })} placeholder = "Ex. xx" type="number"/>
                     </div>
                     <div className='flex gap-2.5 justify-end items-center border'>
                         <Button onClick={()=>setOpen(false)}>Close</Button>
-                        <Button type="Submit" variant={"blueButton"}>Submit</Button>
+                        <Button type="Submit" variant={"blueButton"}  > 
+                            {loading? <LoaderIcon className = 'animate-spin' /> : "Submit"}
+                        </Button>
                     </div>
                   
                     </form>

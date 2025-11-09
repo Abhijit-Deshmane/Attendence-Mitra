@@ -1,0 +1,62 @@
+// import { prisma } from "@prisma/client";
+// import { NextResponse } from "next/server";
+
+// export async function POST(req,res) {
+//     const data = await req.json();
+
+//     const Student = await prisma.Student.create({
+//         data:{
+//             fullName : data?.fullName || "xy",
+//             rollNumber : data?.RollNumber || 23,
+//             class : data?.class || "ty",
+//             contact : data?.contact
+//         }
+//     });
+//     console.log(Student);
+//     return NextResponse.json(Student)
+// }
+
+//  export async function GET (req, res){
+//     const data = await prisma.Student.findMany();
+//     console.log(data)
+//     return NextResponse.json(data);
+// }
+
+
+import { PrismaClient } from "@prisma/client";
+import { NextResponse } from "next/server";
+
+const prisma = new PrismaClient();
+
+// POST → create new student
+export async function POST(req) {
+  try {
+    const data = await req.json();
+    console.log(data)
+    const student = await prisma.student.create({
+      data: {
+        fullname: data?.fullName || "Unnamed Student",
+        class: data?.class || "Unknown",
+        rollNumber: parseInt(data?.rollNumber, 10), 
+       contact: data?.contact || null,
+
+      },
+    });
+    console.log(student)
+    return NextResponse.json(student, { status: 201 });
+  } catch (error) {
+    console.error("Error creating student:", error);
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}
+
+// GET → fetch all students                 
+export async function GET(req) {
+  try {
+    const result = await prisma.student.findMany();
+    return NextResponse.json(result, { status: 200 });
+  } catch (error) {
+    console.error("Error fetching students:", error);
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}
