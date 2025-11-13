@@ -74,6 +74,7 @@ export async function DELETE(req) {
     const result = await prisma.student.delete({
       where: {
         id: parseInt(id),
+  
       },
     });
 
