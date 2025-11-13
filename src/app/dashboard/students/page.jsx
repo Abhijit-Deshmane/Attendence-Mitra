@@ -29,7 +29,9 @@ const GetAllStudent = () => {
         Students <AddNewStudent/>
       </h2>
 
-      <StudentListTable studentList={studentList}/>
+      <StudentListTable studentList={studentList}
+      refreshData={GetAllStudent}
+      />
     </div>
   )
 }

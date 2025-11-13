@@ -1,14 +1,21 @@
 //import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+"use client"
 import { GraduationCap, Hand, LayoutIcon, Settings } from 'lucide-react';
 import { getServerSession } from 'next-auth';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import { usePathname } from 'next/navigation';
+import React, { useEffect } from 'react';
 
 
-async function SideNav() {
-    const session = await getServerSession();
+function SideNav() {
+    // const session = await getServerSession();
 //const {name,image,email} = session.user;
+
+    const path = usePathname();
+    useEffect(() =>{
+        console.log(path);
+    },[path])
     const menuList = [
         {
             id:1,
@@ -50,11 +57,12 @@ async function SideNav() {
         {menuList.map((menu,index)=>(
             <Link href={menu.path}
              key={menu.id}> 
-            <h2 className='flex items-center gap-3 text-md p-4
+        <h2 className={`flex items-center gap-3 text-md p-4
              text-slate-500    
              hover:bg-blue-500
               hover:text-white rounded-lg cursor-pointer
-             '>
+              ${path == menu.path && 'bg-blue-500 text-white'}
+              `}>
                 <menu.icon/>
                 {menu.name}
             </h2>
