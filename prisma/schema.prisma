@@ -20,9 +20,18 @@ model Class {
   class   String @unique
 }
 model Student {
-  id          Int     @id @default(autoincrement())
-  fullname    String
-  class       String  
-  rollNumber  Int 
+  id          Int      @id @default(autoincrement())
+  fullname    String   @db.VarChar(100)
+  class       String   
+  rollNumber  Int      
   contact     String? 
+}
+
+model Attendance {
+  id         Int     @id @default(autoincrement())
+  studentId  Int
+  present    Boolean @default(false)
+  day        Int
+  date       String  @db.VarChar(20)
+  // student  Student @relation(fields: [studentId], references: [id])
 }

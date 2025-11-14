@@ -22,7 +22,6 @@
 //     return NextResponse.json(data);
 // }
 
-
 import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -32,17 +31,16 @@ const prisma = new PrismaClient();
 export async function POST(req) {
   try {
     const data = await req.json();
-    console.log(data)
+    console.log(data);
     const student = await prisma.student.create({
       data: {
         fullname: data?.fullName || "Unnamed Student",
         class: data?.class || "Unknown",
-        rollNumber: parseInt(data?.rollNumber, 10), 
-       contact: data?.contact || null,
-
+        rollNumber: parseInt(data?.rollNumber, 10),
+        contact: data?.contact || null,
       },
     });
-    console.log(student)
+    console.log(student);
     return NextResponse.json(student, { status: 201 });
   } catch (error) {
     console.error("Error creating student:", error);
@@ -50,7 +48,7 @@ export async function POST(req) {
   }
 }
 
-// GET → fetch all students                 
+// GET → fetch all students
 export async function GET(req) {
   try {
     const result = await prisma.student.findMany();
@@ -64,17 +62,18 @@ export async function GET(req) {
 export async function DELETE(req) {
   try {
     const searchParams = req.nextUrl.searchParams;
-    const id = searchParams.get("id"); 
-
+    const id = searchParams.get("id");
 
     if (!id) {
-      return NextResponse.json({ error: "Missing student ID" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Missing student ID" },
+        { status: 400 }
+      );
     }
 
     const result = await prisma.student.delete({
       where: {
         id: parseInt(id),
-  
       },
     });
 
