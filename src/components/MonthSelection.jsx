@@ -20,7 +20,7 @@ const MonthSelection = ({selctedMonth}) => {
   return (
     <div>
       <Popover>
-        <PopoverTrigger>
+        <PopoverTrigger asChild>
           <Button
             variant={"outline"}
             className={"flex gap-2 items-center text-slate-500"}
