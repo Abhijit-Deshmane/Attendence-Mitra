@@ -43,17 +43,6 @@ export async function GET(req) {
     //   },
     // });
 
-    // // Flatten output for frontend
-    // const result = attendance.map(a => ({
-    //   attendanceId: a.id,
-    //   present: a.present,
-    //   day: a.day,
-    //   date: a.date,
-    //   studentId: a.student.id,
-    //   fullname: a.student.fullname,
-    //   class: a.student.class,
-    //   rollNumber: a.student.rollNumber,
-    // }));
 
 
  const students = await prisma.student.findMany({
