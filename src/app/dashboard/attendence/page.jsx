@@ -13,7 +13,7 @@ const Attendence = () => {
   const [selectedGrade, setSelectedGrade] = useState();
   const [attendenceList, setAttendenceList] = useState();
 
-  // used to fetch the attendence list 
+  // used to fetch the attendence list for given month and class
   const onSearchHandeler = () => {
     const month = moment(selectedMonth).format("MM/YYYY");
 
@@ -40,9 +40,11 @@ const Attendence = () => {
         </Button>
       </div>
 
-    {/* Student Attendence Grid */}
-    <AttendenceGrid attendenceList={attendenceList}/>
-
+      {/* Student Attendence Grid */}
+      <AttendenceGrid
+        attendenceList={attendenceList}
+        selectedMonth={selectedMonth}
+      />
     </div>
   );
 };

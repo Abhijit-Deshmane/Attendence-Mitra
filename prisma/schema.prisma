@@ -26,15 +26,17 @@ model Student {
   rollNumber  Int      
   contact     String?
   attendance  Attendance[] 
+
+}
+model Attendance {
+  id        Int      @id @default(autoincrement())
+  studentId Int
+  present   Boolean? @default(false)
+  day       Int?
+  date      String   @db.VarChar(20)
+
+  student   Student  @relation(fields: [studentId], references: [id])
+
+  @@unique([studentId, date])   // <-- REQUIRED
 }
 
-model Attendance {
-  id         Int     @id @default(autoincrement())
-  studentId  Int
-  present    Boolean @default(false)
-  day        Int
-  date       String  @db.VarChar(20)
-  
-  student    Student   @relation(fields: [studentId], references: [id])
-  // student  Student @relation(fields: [studentId], references: [id])
-}

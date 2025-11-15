@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Attendance" ALTER COLUMN "present" DROP NOT NULL,
+ALTER COLUMN "day" DROP NOT NULL;
