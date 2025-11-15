@@ -12,7 +12,7 @@ import { addMonths } from "date-fns";
 import moment from "moment";
 import { Calendar } from "@/components/ui/calendar";
 
-const MonthSelection = ({selctedMonth}) => {
+const MonthSelection = ({selectedMonth}) => {
   const today = new Date();
   const nextMonths = addMonths(new Date(), 0);
   const [month, setMonth] = useState(nextMonths);
@@ -34,7 +34,7 @@ const MonthSelection = ({selctedMonth}) => {
             mode="single"
             month={month}
             onMonthChange ={(value) => {
-                selctedMonth(value);
+                selectedMonth(value);
                 setMonth(value)}}
             className="flex flex-1 justify-center"     
           />

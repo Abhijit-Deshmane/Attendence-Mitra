@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import GlobalApi from "@/app/dashboard/_Services/GlobalApi";
 
-const GradeSelect = () => {
+const GradeSelect = ({selectedGrade}) => {
   const [grades, setGrades] = useState([]);
 
   useEffect(() => {
@@ -20,7 +20,9 @@ const GradeSelect = () => {
 
   return (
     <div>
-      <select name="Class" id="class" className="p-2 rounded-md border">
+      <select name="Class" id="class" className="p-2 rounded-md border"
+      onChange={(e) => selectedGrade(e.target.value)}
+      >
         {grades.map((item, index) => (
           <option key={index} value={item.class}>
             {item.class}

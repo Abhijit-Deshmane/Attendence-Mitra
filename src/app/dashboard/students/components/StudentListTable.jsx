@@ -40,7 +40,7 @@ const StudentListTable = ({ studentList, refreshData }) => {
   const CustomButton = (props) => {
     return (
       <AlertDialog>
-        <AlertDialogTrigger>
+        <AlertDialogTrigger asChild>
           <Button variant={"blueButton"}>
             <Trash />
           </Button>

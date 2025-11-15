@@ -10,7 +10,7 @@ export async function POST(req) {
 
     const cls = await prisma.class.create({
       data: {
-        class : data?.class || "Ty"
+        class: data?.class || "Ty",
       },
     });
 
@@ -24,7 +24,6 @@ export async function POST(req) {
 export async function GET(req) {
   try {
     const cls = await prisma.class.findMany();
-    console.log(cls)
     return NextResponse.json(cls, { status: 201 });
   } catch (error) {
     console.error("Error Geting class", error);

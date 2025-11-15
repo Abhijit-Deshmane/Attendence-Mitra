@@ -24,7 +24,8 @@ model Student {
   fullname    String   @db.VarChar(100)
   class       String   
   rollNumber  Int      
-  contact     String? 
+  contact     String?
+  attendance  Attendance[] 
 }
 
 model Attendance {
@@ -33,5 +34,7 @@ model Attendance {
   present    Boolean @default(false)
   day        Int
   date       String  @db.VarChar(20)
+  
+  student    Student   @relation(fields: [studentId], references: [id])
   // student  Student @relation(fields: [studentId], references: [id])
 }

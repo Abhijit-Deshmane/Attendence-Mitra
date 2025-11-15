@@ -4,10 +4,12 @@ const GetAllClass = ()=> axios.get('/api/class');
 const CreateNewStudent = (data) => axios.post('/api/student', data);
 const GetAllStudent = () => axios.get('/api/student');
 const DeleteStudentRecord = (id) => axios.delete('/api/student?id=' + id);
+const GetAttandenceList =(grade,month) => axios.get('/api/attendence?grade='+grade +"&month=" + month);
 
 export default {
     GetAllClass,
     CreateNewStudent,
     GetAllStudent,
-    DeleteStudentRecord
+    DeleteStudentRecord,
+    GetAttandenceList
 }
