@@ -26,7 +26,7 @@ const GetAllStudent = () => {
   return (
     <div>
       <h2 className='flex justify-between items-center font-bold text-2xl p-4 border'> 
-        Students <AddNewStudent/>
+        Students <AddNewStudent refreshData={GetAllStudent}/>
       </h2>
 
       <StudentListTable studentList={studentList}

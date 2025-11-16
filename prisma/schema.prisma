@@ -36,7 +36,7 @@ model Attendance {
   date      String   @db.VarChar(20)
 
   student   Student  @relation(fields: [studentId], references: [id])
-
-  @@unique([studentId, date])   // <-- REQUIRED
+  @@unique([studentId, date, day])
+ // <-- REQUIRED
 }
 
