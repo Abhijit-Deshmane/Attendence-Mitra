@@ -12,6 +12,8 @@ const MarkAbsent = (studentId, day, date) =>
     "/api/attendence?studentId=" + studentId + "&day=" + day + "&date=" + date
   );
 
+  const TotalPresentCountByDay = (date,grade) => axios.get('/api/dashboard?date='+date+"&grade=" + grade);
+
 export default {
   GetAllClass,
   CreateNewStudent,
@@ -20,4 +22,5 @@ export default {
   GetAttandenceList,
   MarkAttendence,
   MarkAbsent,
+  TotalPresentCountByDay
 };

@@ -8,7 +8,6 @@ import {
 } from "ag-grid-community";
 import { Button } from "@/components/ui/button";
 import { Search, Trash } from "lucide-react";
-import { colorSchemeDark } from "ag-grid-community";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -25,18 +24,18 @@ import { toast } from "sonner";
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
-const paginationPageSize =10;
+const paginationPageSize = 10;
 const paginationPageSizeSelector = [25, 50, 100];
 
 const StudentListTable = ({ studentList, refreshData }) => {
-  const DeleteRecord = (id)=>{  
-    GlobalApi.DeleteStudentRecord(id).then(res=>{
-      if(res){
+  const DeleteRecord = (id) => {
+    GlobalApi.DeleteStudentRecord(id).then((res) => {
+      if (res) {
         toast("Record deleted successfully");
         refreshData();
       }
-    })
-  }
+    });
+  };
   const CustomButton = (props) => {
     return (
       <AlertDialog>
@@ -55,16 +54,18 @@ const StudentListTable = ({ studentList, refreshData }) => {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick ={() =>{
-              DeleteRecord(props?.data?.id);
-            }} >Continue</AlertDialogAction>
+            <AlertDialogAction
+              onClick={() => {
+                DeleteRecord(props?.data?.id);
+              }}
+            >
+              Continue
+            </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
     );
   };
-
-
 
   const [columnDefs] = useState([
     {
@@ -81,7 +82,7 @@ const StudentListTable = ({ studentList, refreshData }) => {
     },
     { headerName: "Class", field: "class", sortable: true, filter: true },
     { headerName: "Contact", field: "contact", sortable: true, filter: true },
-    { field: "action", cellRenderer: CustomButton }
+    { field: "action", cellRenderer: CustomButton },
   ]);
 
   const [searchInput, setSearchInput] = useState();
@@ -102,7 +103,7 @@ const StudentListTable = ({ studentList, refreshData }) => {
   }, [studentList]);
 
   return (
-    <div style={{ height: "550px", width: "80%", margin: "10px", }}>
+    <div style={{ height: "550px", width: "80%", margin: "10px" }}>
       <div className="flex gap-4 mb-4 mt-4 rounded-lg border-2 p-2 hover:border-blue-800  ">
         <Search />
         <input
@@ -123,7 +124,6 @@ const StudentListTable = ({ studentList, refreshData }) => {
           rowData={rowData}
           columnDefs={columnDefs}
           theme={themeQuartz}
-          // theme={themeQuartz.withPart(colorSchemeDark)}
           pagination={true}
           paginationPageSize={paginationPageSize}
           paginationPageSizeSelector={paginationPageSizeSelector}
