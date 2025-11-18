@@ -8,6 +8,7 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  ResponsiveContainer,
 } from "recharts";
 import { getUniqueRecord } from "../_Services/service";
 
@@ -34,7 +35,9 @@ const BarChartComponent = ({ attendenceList, totalPresentData }) => {
     setData(result);
   };
   return (
-    <div>
+  
+    <div className="border-lg shadow-lg p-4 ">
+        <h1 className="text-2xl font-bold mb-3">Attendence</h1>
       <BarChart
         style={{
           width: "100%",
@@ -58,16 +61,20 @@ const BarChartComponent = ({ attendenceList, totalPresentData }) => {
         <Legend />
         <Bar
           dataKey="presentCount"
+          name={ "Total Present"}
           fill="#8884d8"
-          activeBar={<Rectangle fill="pink" stroke="blue" />}
+          activeBar={<Rectangle fill="green" stroke="blue" />}
         />
         <Bar
           dataKey="absentCount"
-          fill="#82ca9d"
-          activeBar={<Rectangle fill="gold" stroke="purple" />}
+          fill="blue"
+          name={"Total Absent"}
+          activeBar={<Rectangle fill="red" stroke="purple" />}
         />
-      </BarChart>
+      </BarChart> 
+        
     </div>
+
   );
 };
 

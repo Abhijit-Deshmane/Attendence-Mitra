@@ -257,7 +257,7 @@ const AttendanceGrid = ({ attendenceList, selectedMonth }) => {
     // 1️⃣ Build Fixed Columns
     // -------------------------------
     const columns = [
-      { headerName: "ID", field: "studentId", width: 90, filter:true},
+      { headerName: "Roll No", field: "rollNumber", width: 100, filter:true},
       { headerName: "Name", field: "name", width: 140, filter:true},
     ];
 
@@ -285,7 +285,7 @@ const AttendanceGrid = ({ attendenceList, selectedMonth }) => {
   // -------------------------------
   // 🔥 Marking Attendance
   // -------------------------------
-  const markAttendance = (day, studentId, present) => {
+  const markAttendance = (day, studentId, present,rollNumber) => {
     const date = moment(selectedMonth).format("MM/YYYY");
 
     if (present) {
@@ -295,11 +295,11 @@ const AttendanceGrid = ({ attendenceList, selectedMonth }) => {
         present: true,
         date,
       }).then(() => {
-        toast(`Student ${studentId} marked Present`);
+        toast(`Student ${rollNumber} marked Present`);
       });
     } else {
       GlobalApi.MarkAbsent(studentId, day, date).then(() => {
-        toast(`Student ${studentId} marked Absent`);
+        toast(`Student ${rollNumber} marked Absent`);
       });
     }
   };
@@ -313,7 +313,7 @@ const AttendanceGrid = ({ attendenceList, selectedMonth }) => {
           const day = Number(e.colDef.field); // 1–31
           if (!day || isNaN(day)) return;
 
-          markAttendance(day, e.data.studentId, e.newValue);
+          markAttendance(day, e.data.studentId, e.newValue,e.data.rollNumber);
         }}
 
         pagination={true}

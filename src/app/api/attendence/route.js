@@ -139,6 +139,7 @@ export async function GET(req) {
 
       return {
         studentId: student.id,
+        rollNumber: student.rollNumber,
         name: student.fullname,
         class: student.class,
         attendance: studentAttendance,
