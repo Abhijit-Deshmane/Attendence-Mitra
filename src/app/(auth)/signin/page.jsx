@@ -20,6 +20,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner";
+import Link from "next/link";
 
 
 const loginSchema = z.object({
@@ -43,15 +44,15 @@ const router = useRouter();
 const prisma = new PrismaClient();
 
 async function onSubmit(values) {
-    toast.message("Submitting...");
+    // toast.message("Submitting...");
   const { username, email, password} = values;
   !username || !email || !password && toast.error("All fields are required");
 try{
-  toast.loading("Logging user...",{
-        action: {
-            label: "Undo",
-          },
-       });
+    // toast.loading("Logging user...",{
+    //       action: {
+    //           label: "Undo",
+    //         },
+    //      });
   const res = await signIn("credentials", {
       username,
       email,
@@ -59,7 +60,7 @@ try{
       redirect: false,
     });
    if (res?.error) {
-      toast.error("Wrong email or password!");
+      toast.error("Wrong UserName or Email or Password !");
    }else if (res?.ok) {
      
      toast.success("User Verified successfully!",{
@@ -67,8 +68,7 @@ try{
          label: "Undo",
         },
       });
-      router.push('/dashboard/sheet');
-      console.log("user Verified successful",res);
+      router.push('/dashboard');
       return user;
     }
       
@@ -78,7 +78,7 @@ try{
             label: "Undo",
           },
        }); 
-       toast.dismiss(); 
+    
       console.log("Error creating user",error);
       return Response.json({message:"Error in logging user", error: error},{status:500});
     }
@@ -138,9 +138,17 @@ try{
           )}
         />
 
-        <Button type="submit" className="w-full dark:bg-blue-500 text-amber-50 text-xl">
-          Sign Up
+      <Button type="submit"  variant={"blueButton"} className="w-full dark:bg-blue-500 text-amber-50 text-xl">
+          Sign In
         </Button>
+
+        <div className="flex items-center gap-5">
+          <p>Do Not Have Account ? </p> 
+          <Link href={"/signup"}>
+          <h3 className="text-xl text-sky-500">Sign up</h3>
+          </Link>
+        </div>
+        
       </form>
     </Form>
     </div>

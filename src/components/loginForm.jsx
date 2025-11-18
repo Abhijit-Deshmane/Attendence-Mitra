@@ -41,15 +41,15 @@ export default function LoginForm() {
 const router = useRouter();
 const prisma = new PrismaClient();
 async function onSubmit(values) {
-    toast.message("Submitting...");
+    // toast.message("Submitting...");
   const { username, email, password} = values;
   !username || !email || !password && toast.error("All fields are required");
 try{
-  toast.loading("Creating user...",{
-        action: {
-            label: "Undo",
-          },
-       });
+  // toast.loading("Creating user...",{
+  //       action: {
+  //           label: "Undo",
+  //         },
+  //      });
   const res = await axios.post("/api/auth/signup", {
     username, 
     email, 
@@ -61,18 +61,13 @@ try{
             label: "Undo",
           },
        });
-        router.push('/dashboard/sheet');
-        console.log("user created successful",res);
-        return user;
-  
+        router.push('/dashboard');
     }catch(error){
        toast.error("User already exists.",{
         action: {
             label: "Undo",
           },
        }); 
-       toast.dismiss(); 
-      console.log("Error creating user",error);
       return Response.json({message:"Error creating user", error: error},{status:500});
     }
 }
