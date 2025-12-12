@@ -90,9 +90,10 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaClient } from "@prisma/client";
 import { compare } from "bcrypt";
+import prisma from "@/lib/prisma";
 
 // Avoid multiple PrismaClient instances in dev (Next.js hot reload)
-const prisma = global.prisma || new PrismaClient();
+// const prisma = global.prisma || new PrismaClient();
 if (process.env.NODE_ENV !== "production") global.prisma = prisma;
 
 export const authOptions = {

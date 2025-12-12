@@ -1,31 +1,8 @@
-// import { prisma } from "@prisma/client";
-// import { NextResponse } from "next/server";
-
-// export async function POST(req,res) {
-//     const data = await req.json();
-
-//     const Student = await prisma.Student.create({
-//         data:{
-//             fullName : data?.fullName || "xy",
-//             rollNumber : data?.RollNumber || 23,
-//             class : data?.class || "ty",
-//             contact : data?.contact
-//         }
-//     });
-//     console.log(Student);
-//     return NextResponse.json(Student)
-// }
-
-//  export async function GET (req, res){
-//     const data = await prisma.Student.findMany();
-//     console.log(data)
-//     return NextResponse.json(data);
-// }
 
 import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
-
-const prisma = new PrismaClient();
+import prisma from "@/lib/prisma";
+// const prisma = new PrismaClient();
 
 // POST → create new student
 export async function POST(req) {
@@ -59,32 +36,6 @@ export async function GET(req) {
   }
 }
 
-// export async function DELETE(req) {
-//   try {
-//     const searchParams = req.nextUrl.searchParams;
-//     const id = searchParams.get("id");
-
-//     if (!id) {
-//       return NextResponse.json(
-//         { error: "Missing student ID" },
-//         { status: 400 }
-//       );
-//     }
-
-//     const result = await prisma.student.delete({
-//       where: {
-//         id: parseInt(id),
-//       },
-//     });
-
-//     return NextResponse.json(result, { status: 200 });
-//   } catch (error) {
-//     console.error("Error deleting student:", error);
-//     return NextResponse.json({ error: error.message }, { status: 500 });
-//   }
-// }
-
-
 
 export async function DELETE(req) {
   try {
@@ -98,14 +49,14 @@ export async function DELETE(req) {
       );
     }
 
-    // 1️⃣ Delete attendance linked to this student
+    // 1️ Delete attendance linked to this student
     await prisma.attendance.deleteMany({
       where: {
         studentId: parseInt(id),
       },
     });
 
-    // 2️⃣ Delete the student
+    // 2️ Delete the student
     const result = await prisma.student.delete({
       where: {
         id: parseInt(id),

@@ -3,7 +3,8 @@ import { PrismaClient } from "@prisma/client";
 import { hash } from "bcrypt";
 import { redirect } from "next/navigation";
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
+import prisma from "@/lib/prisma";
 
 export async function POST(req) {
    
