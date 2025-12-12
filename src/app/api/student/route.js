@@ -17,7 +17,7 @@ export async function POST(req) {
         contact: data?.contact || null,
       },
     });
-    console.log(student);
+    // console.log(student);
     return NextResponse.json(student, { status: 201 });
   } catch (error) {
     console.error("Error creating student:", error);

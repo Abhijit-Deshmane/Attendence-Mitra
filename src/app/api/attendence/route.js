@@ -14,7 +14,7 @@ export async function GET(req) {
       where: { class: classe },
     });
 
-    console.log(students)
+    // console.log(students)
 
     // 2. Get attendance of the month (safe matching)
     const attendance = await prisma.attendance.findMany({

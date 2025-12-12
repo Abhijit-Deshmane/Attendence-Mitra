@@ -45,7 +45,7 @@ const AddNewStudent = ({refreshData}) => {
     setLoading(true);
     try {
       GlobalApi.CreateNewStudent(data).then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data) {
           reset();
           refreshData();
