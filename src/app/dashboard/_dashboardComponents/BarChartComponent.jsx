@@ -19,11 +19,7 @@ const BarChartComponent = ({ attendenceList, totalPresentData }) => {
   const [data, setData] = useState([]);
   const formatAttendenceListCount = () => {
     const totalStudent = getUniqueRecord(attendenceList);
-    //   const result = totalPresentData.map((item =>{
-    //     day:item.day;
-    //     presentCount:item.presentCount;
-    //     absentCount: Number(totalStudent?.length)-Number(item.presentCount)
-    // }))
+
     const result = totalPresentData.map((item) => {
       return {
         name: `Day ${item.day}`, // X-Axis Label
