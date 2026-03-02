@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### Attendence-Mitra
 
-## Getting Started
+A full-stack Student Attendance System built with Next.js, Prisma, PostgreSQL, and NextAuth.js.
+This application allows administrators and teachers to manage students, track attendance, and generate attendance records securely.
 
-First, run the development server:
+## Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# Frontend
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Next.js 15 (App Router)
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+React 19
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Tailwind CSS 4
 
-## Learn More
+Radix UI
 
-To learn more about Next.js, take a look at the following resources:
+React Hook Form
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Zod Validation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Recharts (Analytics)
 
-## Deploy on Vercel
+AG Grid (Advanced Tables)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Lucide Icons
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# backend
+
+Next.js Server Components & API Routes
+
+Prisma ORM
+
+PostgreSQL
+
+NextAuth.js (Authentication)
+
+bcrypt (Password Hashing)
+
+## Features
+
+🔐 Secure Authentication (Credentials + OAuth Ready)
+
+👥 Role-based Access Control (Admin / Teacher)
+
+👨‍🎓 Student Management (Add / Edit / Delete)
+
+🏫 Class & Subject Management
+
+📅 Date-based Attendance Marking
+
+📊 Attendance Analytics Dashboard
+
+📈 Charts & Reports (Recharts)
+
+🗃️ Data Grid with AG Grid
+
+🌙 Dark/Light Mode Support
+
+⚡ Fully Server-Side Optimized (Next.js 15 + Turbopack)
